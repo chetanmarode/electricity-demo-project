@@ -6,6 +6,7 @@ import java.util.Scanner;
 import insert_into_database.InsertIntoBill;
 import insert_into_database.InsertIntoConsumer;
 import insert_into_database.InsertOperation;
+import reports.GenerateBill;
 
 public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -19,9 +20,12 @@ public class Main {
 			System.out.println("1.Insertion into table");
 			System.out.println("2.Register a Consumer");
 			System.out.println("3. Calculate Bill Amount for a customer");
+			System.out.println("4. Generate Reports for all Bills");
+			System.out.println("5. Generate Reports for bills with year and month");
+			System.out.println("6. Generate Reports for bills with area id");
 			System.out.println("0.Exit");
 			System.out.println("Enter choice...");
-			choice = sc.nextInt();
+			choice = Integer.parseInt(sc.nextLine());
 			switch(choice) {
 			case 1: 
 				
@@ -49,10 +53,10 @@ public class Main {
 				do {
 					System.out.println("Enter the consumer Details for Calculating Bill Amount:");
 					System.out.println(">>");
+					System.out.println("Enter the bill id");
+					int bid = Integer.parseInt(sc.nextLine());
 					System.out.println("Enter the consumer id:");
 					int cid = Integer.parseInt(sc.nextLine());
-					System.out.println("Enter the area id:");
-					int aid = Integer.parseInt(sc.nextLine());
 					System.out.println("Enter the year");
 					String year = sc.nextLine();
 					System.out.println("Enter the month");
@@ -63,8 +67,27 @@ public class Main {
 						System.out.println("The units are negative.. Please enter units > 0");
 						units = Integer.parseInt(sc.nextLine());
 					}
-					result = InsertIntoBill.insertIntoBill(cid, aid, year, month, units);
+					result = InsertIntoBill.insertIntoBill(bid, cid, year, month, units);
 				} while(!result);
+				break;
+			case 4: 
+				System.out.println("The Bills that are Present are:");
+				GenerateBill.getBills();
+				break;
+			case 5:
+				System.out.println("Enter the year:");
+				String year = sc.nextLine();
+				System.out.println("Enter the month:");
+				String month = sc.nextLine();
+				System.out.println("The Bills accourding to the year:" + year +" and month:" + month);
+				GenerateBill.getBillsByYearAndMonth(year, month);
+				break;
+			case 6:
+				System.out.println("Enter the area id:");
+				int aid = Integer.parseInt(sc.nextLine());
+				System.out.println("The Bills accourding to the area id:" + aid);
+				GenerateBill.getBillsByAreaAndCity(aid);
+				break;
 			case 0:
 				System.out.println("Exiting the Operation....");
 				break;
