@@ -16,7 +16,14 @@ public class InsertIntoConsumer {
 		cst.setInt(3, area_id);
 		cst.setInt(4, consumer_type_id);
 		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		} catch(SQLException e) {
+			result = false;
+			System.err.println(e.getMessage());
+		}
 		
 		return result;
 	}

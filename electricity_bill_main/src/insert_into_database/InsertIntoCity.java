@@ -13,8 +13,14 @@ public class InsertIntoCity {
 		
 		cst.setInt(1, id);
 		cst.setString(2, city_name);
-		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		} catch(SQLException e) {
+			System.err.println(e.getMessage());
+			result = false;
+		}
 		
 		return result;
 	}

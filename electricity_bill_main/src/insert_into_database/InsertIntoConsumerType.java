@@ -15,7 +15,15 @@ public class InsertIntoConsumerType {
 		cst.setString(2, type_name);
 		cst.setDouble(3, rate);
 		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		} catch(SQLException e) {
+			result = false;
+			System.err.println(e.getMessage());
+		}
+		
 		
 		return result;
 	}
