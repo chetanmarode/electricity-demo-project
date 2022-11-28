@@ -1,11 +1,12 @@
 package main_package;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import insert_into_database.InsertOperation;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Scanner sc = new Scanner(System.in);
 		int choice = -1;
 		
