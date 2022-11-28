@@ -15,7 +15,14 @@ public class InsertIntoArea {
 		cst.setString(2, area_name);
 		cst.setInt(3, city_id);
 		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		}catch(SQLException e) {
+			result = false;
+			System.err.println(e.getMessage());
+		}
 		
 		return result;
 	}
