@@ -24,7 +24,7 @@ public class MyConnection {
 		
 			//Create Connection objection that throws SQLException 
 		
-		Connection con = DriverManager.getConnection(url, "root", "oreo");
+		Connection con = DriverManager.getConnection(url, "root", "root@123");
 		return con;
 	}
 
