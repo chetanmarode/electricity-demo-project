@@ -14,19 +14,23 @@ public class InsertOperation {
 			choice = Integer.parseInt(sc.nextLine());
 			switch(choice) {
 			case 1:
+				System.out.println("Enter number of consumers you want to add:");
+				int n = Integer.parseInt(sc.nextLine());
+				int count =1;
 				do {
-					System.out.println("Enter Consumer Details");
+					System.out.println("Enter Consumer Details of consumer number: " + count);
 					System.out.println(">>");
 					System.out.print("Enter Consumer Id : ");
 					int id = Integer.parseInt(sc.nextLine());
-					System.out.print("Enter Consumer Id : ");
+					System.out.print("Enter Consumer Name : ");
 					String consumerName = sc.nextLine();
 					System.out.print("Enter Area Id : ");
 					int areaId = Integer.parseInt(sc.nextLine());
 					System.out.print("Enter Consumer Type Id : ");
 					int consumerTypeId = Integer.parseInt(sc.nextLine());
 					result = InsertIntoConsumer.insertIntoConsumer(id, consumerName, areaId, consumerTypeId);
-				} while(!result);
+					if(result) count++;
+				} while(!result || count <= n);
 				break;
 
 			case 2:
