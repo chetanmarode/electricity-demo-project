@@ -9,8 +9,7 @@ import database.MyConnection;
 
 public class InsertIntoBill {
 
-	public static boolean insertIntoBill(int id, int consumer_id, String year, String month, int units_consumed) throws ClassNotFoundException, SQLException {
-		Connection con = MyConnection.getConnection("electricity");
+	public static boolean insertIntoBill(Connection con, int id, int consumer_id, String year, String month, int units_consumed) throws ClassNotFoundException, SQLException {
 		
 		Statement st = con.createStatement();
 		String query = "SELECT rate FROM consumer_type ct JOIN consumer c"
