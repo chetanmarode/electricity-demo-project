@@ -13,8 +13,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int choice = -1;
 		
-		do {
-			
+		do {	
 			// Taking the choice from the user
 			System.out.println("Select an Operation: ");
 			System.out.println("1.Insertion into table");
@@ -28,7 +27,6 @@ public class Main {
 			choice = Integer.parseInt(sc.nextLine());
 			switch(choice) {
 			case 1: 
-				
 				// Inserting Data into table
 				InsertOperation.insert();
 				break;
