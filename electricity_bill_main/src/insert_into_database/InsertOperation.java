@@ -1,10 +1,11 @@
 package insert_into_database;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class InsertOperation {
-	public static void insert() throws ClassNotFoundException, SQLException {
+	public static void insert(Connection con) throws ClassNotFoundException, SQLException {
 		Scanner sc = new Scanner(System.in);
 		int choice = -1;
 		boolean result;
@@ -28,7 +29,7 @@ public class InsertOperation {
 					int areaId = Integer.parseInt(sc.nextLine());
 					System.out.print("Enter Consumer Type Id : ");
 					int consumerTypeId = Integer.parseInt(sc.nextLine());
-					result = InsertIntoConsumer.insertIntoConsumer(id, consumerName, areaId, consumerTypeId);
+					result = InsertIntoConsumer.insertIntoConsumer(con, id, consumerName, areaId, consumerTypeId);
 					if(result) count++;
 				} while(!result || count <= n);
 				break;
@@ -43,7 +44,7 @@ public class InsertOperation {
 					String type_name = sc.nextLine();
 					System.out.println("Enter the rate:");
 					double rate = Double.parseDouble(sc.nextLine());
-					result = InsertIntoConsumerType.insertIntoConsumerType(id, type_name, rate);
+					result = InsertIntoConsumerType.insertIntoConsumerType(con, id, type_name, rate);
 				}while(!result);
 				break;
 				
@@ -55,7 +56,7 @@ public class InsertOperation {
 					int city_id=Integer.parseInt(sc.nextLine());
 					System.out.println("Enter the city name");
 					String city_name=sc.nextLine();
-					result = InsertIntoCity.insertIntoCity(city_id, city_name);
+					result = InsertIntoCity.insertIntoCity(con, city_id, city_name);
 				} while (!result);
 				break;
 				
@@ -69,7 +70,7 @@ public class InsertOperation {
 					String area_name = sc.nextLine();
 		            System.out.print("Enter city_id : ");
 		            int city_id = Integer.parseInt(sc.nextLine());
-					result = InsertIntoArea.insertIntoArea(id,area_name,city_id);
+					result = InsertIntoArea.insertIntoArea(con, id,area_name,city_id);
 				} while(!result);
 				break;
 
