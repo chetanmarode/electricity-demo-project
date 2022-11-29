@@ -8,13 +8,19 @@ import database.MyConnection;
 
 public class InsertIntoCity {
 	public static boolean insertIntoCity(int id, String city_name) throws ClassNotFoundException, SQLException {
-		Connection con = MyConnection.getConnection("electricity_bill");
+		Connection con = MyConnection.getConnection("electricity");
 		CallableStatement cst = con.prepareCall("{call insert_into_city(?, ?)}");
 		
 		cst.setInt(1, id);
 		cst.setString(2, city_name);
-		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		} catch(SQLException e) {
+			System.err.println(e.getMessage());
+			result = false;
+		}
 		
 		return result;
 	}

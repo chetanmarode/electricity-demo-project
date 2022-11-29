@@ -8,7 +8,7 @@ import database.MyConnection;
 
 public class InsertIntoConsumer {
 	public static boolean insertIntoConsumer(int id, String name, int area_id, int consumer_type_id) throws ClassNotFoundException, SQLException {
-		Connection con = MyConnection.getConnection("electricity_bill");
+		Connection con = MyConnection.getConnection("electricity");
 		CallableStatement cst = con.prepareCall("{call insert_into_consumer(?, ?, ?, ?)}");
 		
 		cst.setInt(1, id);
@@ -16,7 +16,14 @@ public class InsertIntoConsumer {
 		cst.setInt(3, area_id);
 		cst.setInt(4, consumer_type_id);
 		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		} catch(SQLException e) {
+			result = false;
+			System.err.println(e.getMessage());
+		}
 		
 		return result;
 	}

@@ -8,14 +8,21 @@ import database.MyConnection;
 
 public class InsertIntoArea {
 	public static boolean insertIntoArea(int id, String area_name, int city_id) throws ClassNotFoundException, SQLException {
-		Connection con = MyConnection.getConnection("electricity_bill");
+		Connection con = MyConnection.getConnection("electricity");
 		CallableStatement cst = con.prepareCall("{call insert_into_area(?, ?, ?)}");
 		
 		cst.setInt(1, id);
 		cst.setString(2, area_name);
 		cst.setInt(3, city_id);
 		
-		boolean result = cst.execute();
+		boolean result;
+		try {
+			cst.execute();
+			result = true;
+		}catch(SQLException e) {
+			result = false;
+			System.err.println(e.getMessage());
+		}
 		
 		return result;
 	}
