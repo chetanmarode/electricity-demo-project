@@ -12,14 +12,17 @@ public class InsertIntoBill {
 	public static boolean insertIntoBill(int id, int consumer_id, String year, String month, int units_consumed) throws ClassNotFoundException, SQLException {
 		Connection con = MyConnection.getConnection("electricity");
 		
+		//To get rate of consumer_type from consumer_id and calculate amount
 		Statement st = con.createStatement();
 		String query = "SELECT rate FROM consumer_type ct JOIN consumer c"
-				+ " ON c.consumer_type_id = ct.id AND c.id = " +consumer_id;
+				+ " ON c.consumer_type_id = ct.id AND c.id = " + consumer_id;
 		ResultSet rs = st.executeQuery(query);
+		
+//		We need to move the cursor to the first row.
 		rs.next();
 		Double rate1 = rs.getDouble(1);
 		Double amount = rate1 * units_consumed;
-//		System.out.println(rs.getDouble(1));
+		
 		CallableStatement cst = con.prepareCall("{call insert_into_bill(?, ?, ?, ?, ?, ?)}");
 		cst.setInt(1, id);
 		cst.setInt(2, consumer_id);
@@ -29,7 +32,6 @@ public class InsertIntoBill {
 		cst.setDouble(6, amount);
 	
 		boolean result;
-		
 		try {
 			cst.execute();
 			result = true;
